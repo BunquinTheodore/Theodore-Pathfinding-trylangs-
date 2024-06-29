@@ -14,21 +14,26 @@ void loadMaze(Graph& maze);
 int main() {
     vector<Graph> mazes;
 
-    Graph maze("");
-    loadMaze(maze);
+    Graph maze("../maze1.txt");
     mazes.push_back(maze);
 
     displayAllMazes(mazes);
 
     int mazeChoice = getUserChoice("Choose a maze (enter 1): ", mazes.size());
+    mazeChoice--;
 
     int algorithmChoice = getUserChoice("Choose an algorithm:\n1. Depth-First Search (DFS)\nEnter choice: ", 1);
 
     if (algorithmChoice == 1) {
-        vector<string> path = DepthFirstSearch(mazes[mazeChoice - 1]);
+        Graph maze1 = mazes[mazeChoice];
+        cout << maze.Start << endl;
+        cout << maze.End << endl;
+
+        vector<string> path = DepthFirstSearch(maze1);
         cout << "Path found by DFS:" << endl;
-        for (const auto& node : path) {
-            cout << node << " ";
+        for(int i = 0; i < path.size(); i++)
+        {
+            cout << path[i] << " ";
         }
         cout << endl;
     } else {
